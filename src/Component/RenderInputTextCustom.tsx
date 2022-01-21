@@ -3,12 +3,8 @@ import {Platform, Text, View} from 'react-native';
 import { IC_ARROW_LEFT, IC_ARROW_RIGHT, IC_AVATAR, IC_LIKE } from 'src/assets';
 import styled from 'styled-components/native';
 
-interface Props {
-  message?: String;
-  type?: 'MY' | 'YOUR';
-}
 
-const RenderInputTextCustom = memo((props: Props) => {
+const RenderInputTextCustom = memo((props: any) => {
   return (
     <SContainer>
       <SIcon source={IC_ARROW_RIGHT}/>

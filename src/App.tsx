@@ -22,14 +22,11 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'light';
   const [listData, setListData] = useState<[MessageModel]>();
   const [page, setPage] = useState(1);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = () => {
-    setIsRefreshing(true)
     let param = {
       page: 1,
       limit: LIMIT,
@@ -38,17 +35,14 @@ const App = () => {
     };
     mockApiGet(LIST_MESSAGES_GET, param).then((data: any) => {
       setListData(data);
-      setIsRefreshing(false)
       setPage(1)
     }).catch(err => {
-      setIsRefreshing(false)
     });
   };
 
   const loadMore = () => {
     const isMaxData = page * LIMIT === listData?.length;
     if (isMaxData) {
-      setIsRefreshing(true)
       let param = {
         page: page + 1,
         limit: LIMIT,
@@ -59,9 +53,7 @@ const App = () => {
         setPage(page + 1)
         let newList = listData.concat(data)
         setListData(newList);
-        setIsRefreshing(false)
       }).catch(err => {
-        setIsRefreshing(false)
       });
     }
   }
@@ -71,7 +63,7 @@ const App = () => {
     flex: 1,
   };
 
-  const renderText = useCallback(({item, index}) => {
+  const renderText = useCallback(({ item, index }) => {
     return (
       <RenderMessageItem
         message={item.messange}
@@ -97,16 +89,6 @@ const App = () => {
           contentContainerStyle={{ paddingBottom: 40 }}
           onEndReached={loadMore}
           onEndReachedThreshold={0.01}
-
-          // refreshControl={
-          //   <RefreshControl
-          //     refreshing={isRefreshing}
-          //     onRefresh={loadData}
-          //     title={'Đang tải...'}
-          //     titleColor={'#FFCC00'}
-          //     tintColor={'#FFCC00'}
-          //   />
-          // }
         />
         <RenderInputTextCustom />
       </KeyboardAvoidingView>

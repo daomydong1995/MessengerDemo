@@ -12,13 +12,9 @@ interface Props {
 const RenderMessageItem = memo((props: Props) => {
   return (
     <SContentView type={props.type}>
-      {props.type === 'YOUR' && <SIcon source={IC_AVATAR} /> }
+      {props.type == 'YOUR' && <SIcon source={IC_AVATAR} /> }
       <SViewMessage
-        start={{ x: -0.1, y: 0.1 }}
-        end={{ x: 0.1, y: 1.0 }}
-        locations={[0, 0.9, 0.6]}
-        colors={['#E33B3B', '#E33B3B']}
-        type={props.type}>
+        colors={props.type == 'MY' ? ['#AAC9FF', '#77A7FF', '#1877F2'] : ['#FBCCD2', '#DDD5F0']}>
         <STextMessage>{props.message}</STextMessage>
       </SViewMessage>
     </SContentView>
@@ -36,7 +32,7 @@ const SContentView = styled.View<{type: 'MY' | 'YOUR'}>`
   flex-direction: row;
 `;
 
-const SViewMessage = styled(LinearGradient)<{type: 'MY' | 'YOUR'}>`
+const SViewMessage = styled(LinearGradient)`
   padding: 8px;
   border-radius: 20px;
   max-width: 80%;
@@ -45,7 +41,7 @@ const SViewMessage = styled(LinearGradient)<{type: 'MY' | 'YOUR'}>`
 const STextMessage = styled.Text`
   color: white;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
 `
 
 const SIcon = styled.Image`

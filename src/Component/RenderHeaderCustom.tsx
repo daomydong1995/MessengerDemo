@@ -1,19 +1,15 @@
 import React, {memo} from 'react';
 import {Platform, Text, View} from 'react-native';
-import {IC_ARROW_LEFT, IC_AVATAR} from 'src/assets';
+import {IC_ARROW_LEFT, IC_AVATAR, IC_PHONE} from 'src/assets';
 import styled from 'styled-components/native';
 
-interface Props {
-  message?: String;
-  type?: 'MY' | 'YOUR';
-}
-
-const RenderHeaderCustom = memo((props: Props) => {
+const RenderHeaderCustom = memo((props: any) => {
   return (
     <SContainer>
-      <SIcon source={IC_ARROW_LEFT} />
+      <SIconLeft source={IC_ARROW_LEFT} />
       <SIconAvatar source={IC_AVATAR} />
       <STextTile>Appota Group</STextTile>
+      <SIconRight source={IC_PHONE}/>
     </SContainer>
   );
 });
@@ -34,7 +30,16 @@ const STextTile = styled.Text`
     font-weight: bold;
 `
 
-const SIcon = styled.Image`
+const SIconRight = styled.Image`
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  margin-left: 8px;
+  tint-color: pink;
+  position: absolute;
+  right: 16px;
+`;
+const SIconLeft = styled.Image`
   width: 36px;
   height: 36px;
   border-radius: 18px;
