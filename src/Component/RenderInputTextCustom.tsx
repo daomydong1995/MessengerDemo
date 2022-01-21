@@ -12,7 +12,7 @@ const RenderInputTextCustom = memo((props: Props) => {
   return (
     <SContainer>
       <SIcon source={IC_ARROW_RIGHT}/>
-      <SInputText />
+      <SInputText placeholder='Aa' />
       <SIcon source={IC_LIKE}/>
     </SContainer>
   );

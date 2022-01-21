@@ -28,7 +28,7 @@ const SContainer = styled.View`
 `;
 
 const STextTile = styled.Text`
-    color: #FFFFFF;
+    color: white;
     margin-left: 16px;
     font-size: 16px;
     font-weight: bold;
