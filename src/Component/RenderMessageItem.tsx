@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {Platform, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { IC_AVATAR } from 'src/assets';
@@ -10,11 +10,16 @@ interface Props {
 }
 
 const RenderMessageItem = memo((props: Props) => {
+
+  const isMy = useMemo(() => {
+    return props.type === 'MY'
+  }, [props.type])
+
   return (
-    <SContentView type={props.type}>
-      {props.type == 'YOUR' && <SIcon source={IC_AVATAR} /> }
+    <SContentView type={isMy}>
+      {!isMy && <SIcon source={IC_AVATAR} /> }
       <SViewMessage
-        colors={props.type == 'MY' ? ['#AAC9FF', '#77A7FF', '#1877F2'] : ['#FBCCD2', '#DDD5F0']}>
+        colors={isMy ? ['#AAC9FF', '#77A7FF', '#1877F2'] : ['#FBCCD2', '#DDD5F0']}>
         <STextMessage>{props.message}</STextMessage>
       </SViewMessage>
     </SContentView>
@@ -23,11 +28,11 @@ const RenderMessageItem = memo((props: Props) => {
 
 export default RenderMessageItem;
 //
-const SContentView = styled.View<{type: 'MY' | 'YOUR'}>`
+const SContentView = styled.View<{type: Boolean}>`
   width: 100%;
   padding: 12px;
-  margin-top: ${props => (props.type === 'MY' ? 0 : 10)}px;
-  justify-content: ${props => (props.type === 'MY' ? 'flex-end' : 'flex-start')};
+  margin-top: ${props => (props.type ? 0 : 10)}px;
+  justify-content: ${props => (props.type ? 'flex-end' : 'flex-start')};
   align-items: flex-end;
   flex-direction: row;
 `;

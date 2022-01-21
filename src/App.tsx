@@ -26,7 +26,7 @@ const App = () => {
     loadData();
   }, []);
 
-  const loadData = () => {
+  const loadData = useCallback(() => {
     let param = {
       page: 1,
       limit: LIMIT,
@@ -38,9 +38,9 @@ const App = () => {
       setPage(1)
     }).catch(err => {
     });
-  };
+  }, [listData]);
 
-  const loadMore = () => {
+  const loadMore = useCallback(() => {
     const isMaxData = page * LIMIT === listData?.length;
     if (isMaxData) {
       let param = {
@@ -56,7 +56,7 @@ const App = () => {
       }).catch(err => {
       });
     }
-  }
+  },[page,listData])
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -100,7 +100,7 @@ const SFlatlist = styled(FlatList)`
   width: 100%;
   height: 100%;
   flex: 1;
-  background-color: white;
+  background-color: whitesmoke;
 `;
 
 export default App;
